@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HardTech - Soluciones Tecnológicas</title>
+<style>
+  /* Reset y base */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  body {
+    background: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+  }
+  header {
+    background: #004d99;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  header h1 {
+    font-size: 1.8rem;
+  }
+  /* Logo SVG size */
+  #logo {
+    width: 48px;
+    height: 48px;
+    fill: white;
+  }
+  nav {
+    background: #0066cc;
+  }
+  nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+  }
+  nav li {
+    flex: 1 1 auto;
+  }
+  nav a {
+    display: block;
+    padding: 0.9rem;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s ease;
+  }
+  nav a:hover, nav a.active {
+    background: #003d66;
+  }
+
+  main {
+    padding: 1rem;
+    max-width: 900px;
+    margin: auto;
+  }
+  section {
+    margin-bottom: 2rem;
+  }
+  h2 {
+    margin-bottom: 1rem;
+    color: #004d99;
+  }
+  p {
+    margin-bottom: 1rem;
+  }
+
+  /* Productos Categorías */
+  .category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+  }
+  .category-list button {
+    flex: 1 1 calc(50% - 1rem);
+    padding: 0.8rem;
+    border: 2px solid #004d99;
+    background: white;
+    color: #004d99;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 5px;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  .category-list button.active, .category-list button:hover {
+    background: #004d99;
+    color: white;
+  }
+
+  /* Lista productos */
+  .product-list {
+    list-style: none;
+  }
+  .product-item {
+    background: white;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+    box-shadow: 0 0 6px rgba(0,0,0,0.1);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  .product-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    background: #fff;
+  }
+  .product-details {
+    flex-grow: 1;
+  }
+  .product-item h3 {
+    color: #0066cc;
+    margin-bottom: 0.5rem;
+  }
+  .product-item p {
+    font-size: 0.9rem;
+    color: #555;
+  }
+  .product-item .price {
+    margin-top: 0.5rem;
+    font-weight: 700;
+    color: #009933;
+  }
+
+  /* Contacto */
+  .contact-info p {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Responsive */
+  @media(max-width: 600px) {
+    nav ul {
+      flex-direction: column;
+    }
+    .category-list button {
+      flex: 1 1 100%;
+    }
+    .product-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .product-item img {
+      width: 100%;
+      height: auto;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <svg id="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-label="Logo HardTech" role="img">
+    <rect width="64" height="64" rx="12" ry="12" fill="#004d99"/>
+    <path d="M20 16h24v6H20zM20 26h24v6H20zM20 36h24v6H20z" fill="white"/>
+  </svg>
+  <h1>HardTech - Soluciones Tecnológicas</h1>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#" class="nav-link active" data-section="inicio">Inicio</a></li>
+    <li><a href="#" class="nav-link" data-section="productos">Productos / Servicios</a></li>
+    <li><a href="#" class="nav-link" data-section="sobre-nosotros">Sobre Nosotros</a></li>
+  </ul>
+</nav>
+
+<main>
+  <section id="inicio" class="content-section">
+    <h2>Bienvenidos a HardTech</h2>
+    <p>En HardTech nos dedicamos a brindar soluciones integrales en tecnología, con productos y servicios de alta calidad para particulares y empresas.</p>
+  </section>
+
+  <section id="productos" class="content-section" style="display:none;">
+    <h2>Catálogo de Productos y Servicios</h2>
+
+    <div class="category-list">
+      <button class="category-btn active" data-category="partes">Partes de Computadora</button>
+      <button class="category-btn" data-category="notebooks">Notebooks</button>
+      <button class="category-btn" data-category="equipos">Equipos Informáticos</button>
+      <button class="category-btn" data-category="software">Servicios de Software</button>
+    </div>
+
+    <ul class="product-list" id="product-list">
+      <!-- Productos cargados con JS -->
+    </ul>
+  </section>
+
+  <section id="sobre-nosotros" class="content-section" style="display:none;">
+    <h2>Sobre Nosotros</h2>
+    <p><strong>Historia:</strong> HardTech nace con la misión de facilitar el acceso a tecnología confiable y accesible para todos.</p>
+    <p><strong>Valores:</strong> Calidad, innovación, compromiso y atención personalizada.</p>
+    <div class="contact-info">
+      <p><strong>Contacto:</strong></p>
+      <p>Dirección: Av. Tecnológica 123, Asunción, Paraguay</p>
+      <p>Teléfono: +595 123 456 789</p>
+      <p>Email: contacto@hardtech.com.py</p>
+    </div>
+  </section>
+</main>
+
+<script>
+  // Navegación simple entre secciones
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = document.querySelectorAll('.content-section');
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      // Quitar active de todos
+      navLinks.forEach(l => l.classList.remove('active'));
+      // Ocultar secciones
+      sections.forEach(sec => sec.style.display = 'none');
+      // Mostrar sección seleccionada
+      const sectionId = link.getAttribute('data-section');
+      document.getElementById(sectionId).style.display = 'block';
+      link.classList.add('active');
+    });
+  });
+
+  // Datos de productos por categoría con imágenes
+  const productsData = {
+    partes: [
+      {
+        nombre: "Procesador Intel Core i7",
+        descripcion: "8 núcleos, 16 hilos, 3.8 GHz base, ideal para tareas intensivas.",
+        precio: "USD 320",
+        img: "https://cdn-icons-png.flaticon.com/512/829/829957.png"
+      },
+      {
+        nombre: "Memoria RAM 16GB DDR4",
+        descripcion: "Alta velocidad, compatible con placas madre modernas.",
+        precio: "USD 85",
+        img: "https://cdn-icons-png.flaticon.com/512/1484/1484590.png"
+      }
+    ],
+    notebooks: [
+      {
+        nombre: "Notebook Dell Inspiron 15",
+        descripcion: "Intel i5, 8GB RAM, 512GB SSD, pantalla 15.6 pulgadas.",
+        precio: "USD 750",
+        img: "https://cdn-icons-png.flaticon.com/512/747/747376.png"
+      },
+      {
+        nombre: "MacBook Air M1",
+        descripcion: "Chip M1, 8GB RAM, 256GB SSD, ultraligero y potente.",
+        precio: "USD 1200",
+        img: "https://cdn-icons-png.flaticon.com/512/888/888857.png"
+      }
+    ],
+    equipos: [
+      {
+        nombre: "PC de escritorio gamer",
+        descripcion: "Procesador i9, RTX 3080, 32GB RAM, almacenamiento SSD 1TB.",
+        precio: "USD 2000",
+        img: "https://cdn-icons-png.flaticon.com/512/2983/2983800.png"
+      },
+      {
+        nombre: "Servidor NAS Synology",
+        descripcion: "Almacenamiento en red para empresas pequeñas.",
+        precio: "USD 600",
+        img: "https://cdn-icons-png.flaticon.com/512/1015/1015213.png"
+      }
+    ],
+    software: [
+      {
+        nombre: "Desarrollo de software a medida",
+        descripcion: "Soluciones personalizadas para automatizar tu negocio.",
+        precio: "Cotización según proyecto",
+        img: "https://cdn-icons-png.flaticon.com/512/906/906175.png"
+      },
+      {
+        nombre: "Mantenimiento y soporte técnico",
+        descripcion: "Asistencia y soporte remoto o presencial para sistemas informáticos.",
+        precio: "Plan mensual desde USD 100",
+        img: "https://cdn-icons-png.flaticon.com/512/159/159604.png"
+      }
+    ]
+  };
+
+  // Mostrar productos por categoría
+  const categoryButtons = document.querySelectorAll('.category-btn');
+  const productList = document.getElementById('product-list');
+
+  function renderProducts(category) {
+    productList.innerHTML = '';
+    productsData[category].forEach(prod => {
+      const li = document.createElement('li');
+      li.className = 'product-item';
+      li.innerHTML = `
+        <img src="${prod.img}" alt="${prod.nombre}">
+        <div class="product-details">
+          <h3>${prod.nombre}</h3>
+          <p>${prod.descripcion}</p>
+          <p class="price">${prod.precio}</p>
+        </div>
+      `;
+      productList.appendChild(li);
+    });
+  }
+
+  categoryButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Cambiar activo en botones
+      categoryButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      // Renderizar productos
+      renderProducts(btn.getAttribute('data-category'));
+    });
+  });
+
+  // Renderizar categoría inicial
+  renderProducts('partes');
+</script>
+
+</body>
+</html>
